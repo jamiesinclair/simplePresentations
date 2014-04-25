@@ -1,0 +1,45 @@
+<!DOCTYPE html>  
+<head>  
+	<title>launch video</title>
+</head>  
+<body>
+	
+	<a href="#" id="launch">Launch</a>
+	
+	<!-- <video id="video" autoplay="true" loop="loop">
+		<source src="./video/maidsafe720.oggtheora.ogv" type="video/ogg" />
+		<source src="./video/maidsafe720.mp4" type="video/mp4" />
+	</video>   -->
+
+	<script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+	
+	<script type="text/javascript">
+	
+	$('#launch').on('click',function(e) {
+		
+		var windowUrl = 'live.html';
+		var windowId = 'simplePresentationLive';
+		var windowFeatures = 
+		'channelmode=no,directories=no,fullscreen=no,' +
+		'location=no,dependent=yes,menubar=no,resizable=no,scrollbars=yes,' + 
+		'status=no,toolbar=no,titlebar=no,' +
+		'left=0,top=0,width=400px,height=200px';
+
+		window.liveWindow = window.open(windowUrl, windowId, windowFeatures);
+		
+		window.$liveBody = $(liveWindow.document.body);
+		
+		e.stopPropagation();
+		return false;
+	});
+	
+	
+	
+	
+	function playVideo() {
+		liveWindow.playVideo('./video/hiphop.mp4','video/mp4');
+	}
+	
+	</script>
+</body>  
+</html>  

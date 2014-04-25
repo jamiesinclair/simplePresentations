@@ -1,0 +1,39 @@
+<script type="text/javascript">
+<!--
+var windowRef = null;
+
+function openChildWindow() 
+{
+ if ( (windowRef != null) && (windowRef.closed == false) )
+ {
+  if  ( windowRef.closed == false )
+   windowRef.close();
+  windowRef = null;
+ }
+
+ var windowUrl = 'child.html';
+ var windowId = 'NewWindow_' + new Date().getTime();
+ var windowFeatures = 
+  'channelmode=no,directories=no,fullscreen=no,' +
+  'location=no,dependent=yes,menubar=no,resizable=no,scrollbars=yes,' + 
+  'status=no,toolbar=no,titlebar=no,' +
+  'left=0,top=0,width=400px,height=200px';
+
+ windowRef = window.open(windowUrl, windowId, windowFeatures);
+
+ windowRef.focus();
+
+ // Need to call on a delay to allow
+ // the child window to fully load...
+ window.setTimeout(callChildWindowFunction(), 1000);
+}
+
+function callChildWindowFunction()
+{
+ if ( (windowRef != null) && (windowRef.closed == false) )
+  windowRef.childWindowFunction();
+}
+
+
+// -->
+</script>

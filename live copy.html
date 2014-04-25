@@ -1,0 +1,57 @@
+<!DOCTYPE html>  
+<head>  
+	<title>simplePresentation Live Screen</title>
+	
+	<style rel="stylesheet">
+	html,body,#screen {margin:0;padding:0;width:100%;height:100%;}
+	#screen {background-color:#fff;}
+	</style>
+</head>
+<body>
+	
+	<div id="screen">
+		<div style="display: none;">
+			<video id="video">
+			</video>
+		</div>
+		<canvas id="canvas"></canvas>  
+	</div>
+	<script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+	
+	
+	
+	
+	<script type="text/javascript">
+	
+	function playVideo(src,type) {
+		var $s = $('<source></source>')
+		.attr('src',src);
+		.attr('type',type);
+	
+		$('#video').append($s);
+		$('#video')[0].play();
+	};
+	
+
+
+	function makeFull() {
+		
+		el = $('#screen')[0];
+		
+		if (el.requestFullscreen) {
+			el.requestFullscreen();
+		}
+		 else if (el.msRequestFullscreen) {
+			el.msRequestFullscreen();
+		}
+		 else if (el.mozRequestFullScreen) {
+			el.mozRequestFullScreen();
+		} else if (el.webkitRequestFullscreen) {
+			el.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+		}
+	}
+	
+	$(document).on('click',makeFull);
+	</script>
+</body>  
+</html>  

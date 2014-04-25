@@ -1,0 +1,83 @@
+<!DOCTYPE html>  
+<head>  
+	<title>simplePresentation Live Screen</title>
+	
+	<style rel="stylesheet">
+	html,body,#screen {margin:0;padding:0;width:100%;height:100%;}
+	#screen {background-color:#fff;}
+	
+	#canvas {width:100%;height:100%;}
+	</style>
+</head>
+<body>
+	<div id="screen">
+		<div style="display: none;">
+			<video id="video">
+			</video>
+		</div>
+		<canvas id="canvas"></canvas>  
+	</div>
+	<script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+
+<script type="text/javascript">
+function playVideo(src,type) {
+	var $s = $('<source></source>');
+	$s.attr('src',src);
+	$s.attr('type',type);
+	
+	$('#video').append($s);
+	$('#video')[0].play();
+};
+
+var video = document.getElementById('video');
+document.addEventListener('DOMContentLoaded', function(){  
+		var v = document.getElementById('video');  
+		var canvas = document.getElementById('canvas');  
+		var context = canvas.getContext('2d');  
+		
+		console.log(canvas.clientWidth);
+		//var cw = Math.floor(canvas.clientWidth / 100);  
+		//var ch = Math.floor(canvas.clientHeight / 100);  
+		// var cw = Math.floor(canvas.clientWidth);  
+		// var ch = Math.floor(canvas.clientHeight);  
+		var cw = 1280;  
+		var ch = 720;  
+		canvas.width = cw;  
+		canvas.height = ch;  
+		// canvas.width = 1280;  
+		// canvas.height = 720;  
+
+		v.addEventListener('play', function(){  
+			draw(this,context,cw,ch);  
+			},false);  
+	},false);  
+	
+	function draw(v,c,w,h) {  
+		if(v.paused || v.ended) return false;  
+		c.drawImage(v,0,0,w,h);  
+		setTimeout(draw,20,v,c,w,h);  
+	}
+
+
+function makeFull() {
+	
+	el = $('#screen')[0];
+	
+	if (el.requestFullscreen) {
+		el.requestFullscreen();
+	}
+	 else if (el.msRequestFullscreen) {
+		el.msRequestFullscreen();
+	}
+	 else if (el.mozRequestFullScreen) {
+		el.mozRequestFullScreen();
+	} else if (el.webkitRequestFullscreen) {
+		el.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+	}
+}
+
+$(document).on('click',makeFull);
+
+</script>
+</body>
+</html>
